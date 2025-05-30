@@ -41,7 +41,7 @@
                     pip install -r requirements.txt
                     '';
 
-Allow pip install wheels
+# Allow pip install wheels
                 postShellHook = ''
                     unset SOURCE_DATE_EPOCH
 

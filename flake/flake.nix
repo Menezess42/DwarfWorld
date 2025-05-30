@@ -23,7 +23,7 @@
                 buildInputs =[
                 pythonPkgs.python
                 pythonPkgs.venvShellHook
-                # pythonPkgs.pyside6
+                pythonPkgs.pyside6
                 # pkgs.qt6.qtwayland
                 pkgs.taglib
                 pkgs.openssl

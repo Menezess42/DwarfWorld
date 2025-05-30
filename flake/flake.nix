@@ -24,7 +24,8 @@
                 pythonPkgs.python
                 pythonPkgs.venvShellHook
                 pythonPkgs.pyside6
-                # pkgs.qt6.qtwayland
+                pkgs.qt6.qtwayland
+                pkgs.qt6.qtbase
                 pkgs.taglib
                 pkgs.openssl
                 pkgs.libxml2

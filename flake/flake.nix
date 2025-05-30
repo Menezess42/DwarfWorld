@@ -58,14 +58,13 @@
                 postShellHook = ''
                     unset SOURCE_DATE_EPOCH
 
-# Caminho para os plugins Qt6 (nix)
-                    export QT_QPA_PLATFORM_PLUGIN_PATH=${pkgs.qt6.qtbase}/lib/qt6/plugins/platforms
-
-# Forçar uso de Wayland
                     export QT_QPA_PLATFORM=wayland
 
-# Corrigir paths de bibliotecas Qt se necessário
-                    export LD_LIBRARY_PATH=${pkgs.qt6.qtbase}/lib:$LD_LIBRARY_PATH
+# Diretórios de plugins do Qt6
+                    export QT_QPA_PLATFORM_PLUGIN_PATH=${pkgs.qt6.qtbase}/lib/qt6/plugins/platforms:${pkgs.qt6.qtwayland}/lib/qt6/plugins/platforms
+
+# LD_LIBRARY_PATH para garantir carregamento de libs Qt
+                    export LD_LIBRARY_PATH=${pkgs.qt6.qtbase}/lib:${pkgs.qt6.qtwayland}/lib:$LD_LIBRARY_PATH
 
                     HASH_FILE=".venv/.requirements_hash"
                     NEW_HASH=$(sha256sum requirements.txt | cut -d ' ' -f 1)

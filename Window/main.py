@@ -82,7 +82,7 @@ class TransparentWindow(QtWidgets.QWidget):
             self.emoji.setVisible(True)
 
 
-def main():
+def Frame():
     app = QtWidgets.QApplication([])
     window = TransparentWindow()
     window.show()
@@ -90,4 +90,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    Frame()

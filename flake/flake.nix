@@ -59,12 +59,12 @@
                     unset SOURCE_DATE_EPOCH
 
 # Caminho para os plugins Qt6 (nix)
-                    export QT_QPA_PLATFORM_PLUGIN_PATH=${pkgs.qt6.qtbase.bin}/lib/qt6/plugins/platforms
+                    export QT_QPA_PLATFORM_PLUGIN_PATH=${pkgs.qt6.qtbase}/lib/qt6/plugins/platforms
 
-# Forçar o uso de Wayland (evita fallback para xcb se houver problemas)
+# Forçar uso de Wayland
                     export QT_QPA_PLATFORM=wayland
 
-# Prevenir falhas com bibliotecas Qt no venv
+# Corrigir paths de bibliotecas Qt se necessário
                     export LD_LIBRARY_PATH=${pkgs.qt6.qtbase}/lib:$LD_LIBRARY_PATH
 
                     HASH_FILE=".venv/.requirements_hash"

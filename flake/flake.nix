@@ -41,40 +41,20 @@
                     pip install -r requirements.txt
                     '';
 
-# Allow pip install wheels
-                # postShellHook = ''
-                #     unset SOURCE_DATE_EPOCH
-                #
-                #     HASH_FILE=".venv/.requirements_hash"
-                #     NEW_HASH=$(sha256sum requirements.txt | cut -d ' ' -f 1)
-                #
-                #     if [ ! -f $HASH_FILE ] || [ "$NEW_HASH" != "$(cat $HASH_FILE)" ]; then
-                #         echo "Installing Python deps from requirements.txt..."
-                #             pip install -r requirements.txt
-                #             echo $NEW_HASH > $HASH_FILE
-                #             fi
-                #     '';
+Allow pip install wheels
+                postShellHook = ''
+                    unset SOURCE_DATE_EPOCH
 
-postShellHook = ''
-  unset SOURCE_DATE_EPOCH
+                    HASH_FILE=".venv/.requirements_hash"
+                    NEW_HASH=$(sha256sum requirements.txt | cut -d ' ' -f 1)
 
-  export QT_QPA_PLATFORM=wayland
+                    if [ ! -f $HASH_FILE ] || [ "$NEW_HASH" != "$(cat $HASH_FILE)" ]; then
+                        echo "Installing Python deps from requirements.txt..."
+                            pip install -r requirements.txt
+                            echo $NEW_HASH > $HASH_FILE
+                            fi
+                    '';
 
-  # Diretórios de plugins do Qt6
-  export QT_QPA_PLATFORM_PLUGIN_PATH=${pkgs.qt6.qtbase}/lib/qt6/plugins/platforms:${pkgs.qt6.qtwayland}/lib/qt6/plugins/platforms
-
-  # LD_LIBRARY_PATH para garantir carregamento de libs Qt
-  export LD_LIBRARY_PATH=${pkgs.qt6.qtbase}/lib:${pkgs.qt6.qtwayland}/lib:$LD_LIBRARY_PATH
-
-  HASH_FILE=".venv/.requirements_hash"
-  NEW_HASH=$(sha256sum requirements.txt | cut -d ' ' -f 1)
-
-  if [ ! -f $HASH_FILE ] || [ "$NEW_HASH" != "$(cat $HASH_FILE)" ]; then
-      echo "Installing Python deps from requirements.txt..."
-      pip install -r requirements.txt
-      echo $NEW_HASH > $HASH_FILE
-  fi
-'';
                 };
                 }
                 );

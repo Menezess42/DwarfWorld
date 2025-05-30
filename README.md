@@ -18,3 +18,8 @@
 | **5. Companion (final)**            | **Pymunk + Pygame-CE / Qt**  | • Usa física para comportamentos (gravidade, colisões)<br>• Sprites animados frame-a-frame    | • Integração completa exige bom gerenciamento de loop e sincronismo                                  | Conforme GUI escolhida          |
 | **Pixel Art & Rendering**           | **Pyxel**                    | • Ferramentas built-in para pixel art retro<br>• API muito simples                            | • Resolução e paleta limitadas (16 cores)                                                            | XWayland                        |
 |                                     | **Cairo / QPainter**         | • Desenho vetorial e bitmap com alpha real<br>• Escalamento “pixel-per-pixel”                 | • Mais código “baixo nível” para cada frame                                                          | Nativo (GTK4/Cairo ou Qt)       |
+
+
+## 1. Floating Window
+- I decided to use the first option, the **PySide6**.
+- I chose PySide6 because of its permissive license.

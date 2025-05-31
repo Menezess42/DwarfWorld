@@ -24,6 +24,8 @@
                 pythonPkgs.python
                 pythonPkgs.venvShellHook
                 pythonPkgs.pyside6
+                pythonPkgs.pymunk
+                pythonPkgs.noise
                 pkgs.qt6.qtwayland
                 pkgs.qt6.qtbase
                 pkgs.taglib

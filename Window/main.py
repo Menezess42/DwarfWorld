@@ -3,7 +3,6 @@ import sys
 from pathlib import Path
 
 from PySide6 import QtCore, QtGui, QtWidgets
-
 # CONSTANTS
 BASE_DIR = Path(__file__).parent
 SRC_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,7 +16,6 @@ def get_resource_path(filename: str) -> Path:
 class TransparentWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
-
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.setStyleSheet("background-color: transparent;")
@@ -26,26 +24,22 @@ class TransparentWindow(QtWidgets.QWidget):
         self.setWindowTitle("DwarfWorldWindow")
         self.setObjectName("DwarfWorldWindow")
 
-        # Emoji (como texto)
-        # label = QtWidgets.QLabel(self)
-        # label.setPixmap(QtGui.QPixmap("../Assets/Tests/littleDwarf.png"))
-        # label.move(0, 200)
+        # Sprites animados
+        self.sprites = [
+            QtGui.QPixmap(f"{IMAGES_PATH}/1.png").scaled(100, 100, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation),
+            QtGui.QPixmap(f"{IMAGES_PATH}/2.png").scaled(100, 100, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation),
+            QtGui.QPixmap(f"{IMAGES_PATH}/3.png").scaled(100, 100, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation),
+            QtGui.QPixmap(f"{IMAGES_PATH}/4.png").scaled(100, 100, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation),
+        ]
+        self.sprite_index = 0
 
-        label = QtWidgets.QLabel(self)
-        pixmap = QtGui.QPixmap(f"{IMAGES_PATH}/littleDwarf.png")
-        scaled_pixmap = pixmap.scaled(
-            100, 100, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation
-        )
-        print(pixmap)
-        print(scaled_pixmap)
-        label.setPixmap(scaled_pixmap)
-        label.move(0, 200)
-
-        self.emoji = label
-        self.emoji.setStyleSheet("font-size: 48px;")
+        self.frame_count = 0  # Contador de frames
+        self.sprite_update_interval = 5  # Trocar sprite a cada 5 frames
+        # Label de imagem
+        self.emoji = QtWidgets.QLabel(self)
+        self.emoji.setPixmap(self.sprites[self.sprite_index])
         self.emoji.move(0, 200)
 
-        # Estado interno
         self.emoji_alive = True
         self.emoji_visible = True
         self.emoji_x = 0
@@ -53,9 +47,9 @@ class TransparentWindow(QtWidgets.QWidget):
         # Timer de movimento
         self.timer = QtCore.QTimer(self)
         self.timer.timeout.connect(self.move_emoji)
-        self.timer.start(30)  # milissegundos
+        self.timer.start(30)
 
-        # Posição inicial da janela
+        # Posição da janela
         screen = QtWidgets.QApplication.primaryScreen()
         available_geometry = screen.availableGeometry()
         x = available_geometry.right() - self.width() - 8
@@ -68,6 +62,14 @@ class TransparentWindow(QtWidgets.QWidget):
             if self.emoji_x > self.width():
                 self.emoji_x = -40
             self.emoji.move(self.emoji_x, 200)
+
+            self.frame_count += 1
+            if self.frame_count % self.sprite_update_interval == 0:
+                self.change_sprite()
+
+    def change_sprite(self):
+        self.sprite_index = (self.sprite_index + 1) % len(self.sprites)
+        self.emoji.setPixmap(self.sprites[self.sprite_index])
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         key = event.key()

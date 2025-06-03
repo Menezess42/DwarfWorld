@@ -5,6 +5,7 @@ from pathlib import Path
 import random
 
 from PySide6 import QtCore, QtGui, QtWidgets
+from calc_foot import calculate_foot_offset
 
 # CONSTANTS
 BASE_DIR = Path(__file__).parent
@@ -14,16 +15,13 @@ ASSETS_PATH = "./Assets/Tests/"
 TILE_W = 64
 TILE_H = 64
 
-test = [
-        [0.0, 0.0], [32.0, 16.0], [64.0, 32.0], [96.0, 48.0], [128.0, 64.0], [160.0, 80.0], [192.0, 96.0], [224.0, 112.0], [256.0, 128.0], [288.0, 144.0], [-32.0, 16.0], [0.0, 32.0], [32.0, 48.0], [64.0, 64.0], [96.0, 80.0], [128.0, 96.0], [160.0, 112.0], [192.0, 128.0], [224.0, 144.0], [256.0, 160.0], [-64.0, 32.0], [-32.0, 48.0], [0.0, 64.0], [32.0, 80.0], [64.0, 96.0], [96.0, 112.0], [128.0, 128.0], [160.0, 144.0], [192.0, 160.0], [224.0, 176.0], [-96.0, 48.0], [-64.0, 64.0], [-32.0, 80.0], [0.0, 96.0], [32.0, 112.0], [64.0, 128.0], [96.0, 144.0], [128.0, 160.0], [160.0, 176.0], [192.0, 192.0], [-128.0, 64.0], [-96.0, 80.0], [-64.0, 96.0], [-32.0, 112.0], [0.0, 128.0], [32.0, 144.0], [64.0, 160.0], [96.0, 176.0], [128.0, 192.0], [160.0, 208.0], [-160.0, 80.0], [-128.0, 96.0], [-96.0, 112.0], [-64.0, 128.0], [-32.0, 144.0], [0.0, 160.0], [32.0, 176.0], [64.0, 192.0], [96.0, 208.0], [128.0, 224.0], [-192.0, 96.0], [-160.0, 112.0], [-128.0, 128.0], [-96.0, 144.0], [-64.0, 160.0], [-32.0, 176.0], [0.0, 192.0], [32.0, 208.0], [64.0, 224.0], [96.0, 240.0], [-224.0, 112.0], [-192.0, 128.0], [-160.0, 144.0], [-128.0, 160.0], [-96.0, 176.0], [-64.0, 192.0], [-32.0, 208.0], [0.0, 224.0], [32.0, 240.0], [64.0, 256.0], [-256.0, 128.0], [-224.0, 144.0], [-192.0, 160.0], [-160.0, 176.0], [-128.0, 192.0], [-96.0, 208.0], [-64.0, 224.0], [-32.0, 240.0], [0.0, 256.0], [32.0, 272.0], [-288.0, 144.0], [-256.0, 160.0], [-224.0, 176.0], [-192.0, 192.0], [-160.0, 208.0], [-128.0, 224.0], [-96.0, 240.0], [-64.0, 256.0], [-32.0, 272.0], [0.0, 288.0]]
-
 
 class TransparentWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()  # Importa as funcionalidades do QWidget
         self.grid = []
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # Janela transparente
-        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)       # Sem bordas
+        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # Janela transparente
+        # self.setWindowFlag(QtCore.Qt.FramelessWindowHint)       # Sem bordas
         self.setStyleSheet("background-color: transparent;")    # Fundo transparente
         layout = QtWidgets.QVBoxLayout(self)
         self.setWindowTitle("DwarfWorldWindow")
@@ -34,25 +32,30 @@ class TransparentWindow(QtWidgets.QWidget):
         self.sprite_sheet = QtGui.QPixmap(f"{ASSETS_PATH}Char.png")
         self.fw = 39
         self.fh = 58
-        self.direction_index = 3
-
+        self.direction_index = 0
         self.current_index = 0
         self.target_index = 0
 
         # Inicializa as posições do personagem com base na grid
-        start_x, start_y = self.grid[self.current_index]
+        # start_x, start_y = self.grid[self.current_index]
+        start_x, start_y = self.grid[55]
+        # start_x = start_x + TILE_W / 2
+        # start_y = start_y + TILE_H / 4
         self.x, self.y = start_x, start_y
         self.target_x, self.target_y = start_x, start_y
 
         self.sprite_item = self.scene.addPixmap(self.get_current_frame())
+        a = calculate_foot_offset(self.get_current_frame())
+        self.sprite_item.setOffset(a)
         self.sprite_item.setZValue(1)  # Fica acima dos tiles
         self.sprite_item.setPos(self.x, self.y)
 
-        self.move_timer = QtCore.QTimer()
-        self.move_timer.timeout.connect(self.update_position)
-        self.move_timer.start(500)
 
-        self.choose_new_target()
+        # self.move_timer = QtCore.QTimer()
+        # self.move_timer.timeout.connect(self.update_position)
+        # self.move_timer.start(500)
+        #
+        # self.choose_new_target()
 
         view = QtWidgets.QGraphicsView(self.scene)
         view.setInteractive(False)
@@ -103,6 +106,9 @@ class TransparentWindow(QtWidgets.QWidget):
 
         # Atualiza o sprite visual e a posição na cena
         self.sprite_item.setPixmap(self.get_current_frame())
+        a = calculate_foot_offset(self.get_current_frame())
+        print(a)
+        self.sprite_item.setOffset(a)
         self.sprite_item.setPos(self.x, self.y)
 
 

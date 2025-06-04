@@ -26,6 +26,8 @@
                 pythonPkgs.pyside6
                 pythonPkgs.pymunk
                 pythonPkgs.noise
+                pythonPkgs.numpy
+                pythonPkgs.matplotlib
                 pkgs.qt6.qtwayland
                 pkgs.qt6.qtbase
                 pkgs.taglib

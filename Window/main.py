@@ -32,20 +32,49 @@ class TransparentWindow(QtWidgets.QWidget):
         self.seeTileCoordinates()
         self.seeMiddleTileCoordinates()
 
-        self.sprite_sheet = QtGui.QPixmap(f"{ASSETS_PATH}finalChar.png")
+        self.sprite_sheet = QtGui.QPixmap(f"{ASSETS_PATH}/finalChar.png")
         self.fw = 18
         self.fh = 24
         self.direction_index = 3
         self.current_index = 0
         self.target_index = 0
 
-        self.x, self.y = self.gridMiddle[55]
-
+        self.x, self.y = self.gridMiddle[0]
+        xaux, yaux = self.grid[0]
+        
         self.sprite_item = self.scene.addPixmap(self.get_current_frame())
+        pixmap = self.get_current_frame()
+        foot_offset = calculate_foot_offset(pixmap)
+        print(self.get_current_frame())
         a = calculate_foot_offset(self.get_current_frame())
-        self.sprite_item.setOffset(a)
+        x, y = a.toTuple()
+        self.sprite_item.setOffset(x, y)
         self.sprite_item.setZValue(1)  # Fica acima dos tiles
         self.sprite_item.setPos(self.x, self.y)
+
+        # Cria uma cópia da imagem original para desenhar nela
+        pixmap_copy = QtGui.QPixmap(pixmap)  # faz uma cópia para não alterar a original
+
+        # Inicia o pintor para desenhar sobre o pixmap
+        painter = QtGui.QPainter(pixmap_copy)
+        painter.setRenderHint(QtGui.QPainter.Antialiasing)
+
+        # Define a cor e o pincel (círculo vermelho, por exemplo)
+        pen = QtGui.QPen(QtGui.QColor("red"))
+        pen.setWidth(1)
+        painter.setPen(pen)
+        painter.setBrush(QtGui.QBrush(QtGui.QColor("red")))
+
+        # Desenha um pequeno círculo no ponto (x, y)
+        radius = 1
+        painter.drawEllipse(QtCore.QPointF(x, y), radius, radius)
+
+        # Finaliza o pintor
+        painter.end()
+
+        # Salva a imagem com o ponto desenhado
+        pixmap_copy.save("frame_with_offset.png", "PNG")
+
 
         view = QtWidgets.QGraphicsView(self.scene)
         view.setInteractive(False)
@@ -61,10 +90,10 @@ class TransparentWindow(QtWidgets.QWidget):
         Cria uma grade isométrica de 10x10 tiles.
         Cada tile é posicionado de forma a simular perspectiva isométrica.
         """
-        with open(f'{ASSETS_PATH}noise.json', 'r') as file:
-            data = json.load(file)
-        for linha in range(20):       # eixo Y lógico
-            for coluna in range(20):  # eixo X lógico
+        # with open(f'{ASSETS_PATH}noise.json', 'r') as file:
+        #     data = json.load(file)
+        for linha in range(14):       # eixo Y lógico
+            for coluna in range(14):  # eixo X lógico
                 # v = data[linha][coluna]
                 # print(v)
                 # if v < 0.45:
@@ -91,13 +120,12 @@ class TransparentWindow(QtWidgets.QWidget):
         for i in self.grid:
             item = "."
             itemScene = self.scene.addText(item)
-            print(i)
             itemScene.setPos(i[0], i[1])
             itemScene.setDefaultTextColor('orange')
             
     def seeMiddleTileCoordinates(self):
         for i in self.gridMiddle:
-            item = ";"
+            item = "."
             itemScene = self.scene.addText(item)
             itemScene.setPos(i[0], i[1])
             itemScene.setDefaultTextColor('black')
@@ -119,6 +147,7 @@ class TransparentWindow(QtWidgets.QWidget):
             self.fw,
             self.fh
         )
+        print(type(frame))
         return frame
 
 

@@ -12,14 +12,15 @@ BASE_DIR = Path(__file__).parent
 SRC_DIR = os.path.dirname(os.path.abspath(__file__))
 ASSETS_PATH = os.path.join(SRC_DIR, "Assets", "Tests")
 ASSETS_PATH = "./Assets/Tests/"
-TILE_W = 64
-TILE_H = 64
+TILE_W = 32
+TILE_H = 32
 
 
 class TransparentWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()  # Importa as funcionalidades do QWidget
         self.grid = []
+        self.gridMiddle = []
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # Janela transparente
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)       # Sem bordas
         self.setStyleSheet("background-color: transparent;")    # Fundo transparente
@@ -28,17 +29,17 @@ class TransparentWindow(QtWidgets.QWidget):
 
         self.scene = QtWidgets.QGraphicsScene(0, 0, 0, 0)
         self.creatingTiles()  # Preenche self.grid com posições isométricas
+        self.seeTileCoordinates()
+        self.seeMiddleTileCoordinates()
 
-        self.sprite_sheet = QtGui.QPixmap(f"{ASSETS_PATH}Char.png")
-        self.fw = 39
-        self.fh = 58
-        self.direction_index = 0
+        self.sprite_sheet = QtGui.QPixmap(f"{ASSETS_PATH}finalChar.png")
+        self.fw = 18
+        self.fh = 24
+        self.direction_index = 3
         self.current_index = 0
         self.target_index = 0
 
-        start_x, start_y = self.grid[55]
-        self.x, self.y = start_x, start_y
-        self.target_x, self.target_y = start_x, start_y
+        self.x, self.y = self.gridMiddle[55]
 
         self.sprite_item = self.scene.addPixmap(self.get_current_frame())
         a = calculate_foot_offset(self.get_current_frame())
@@ -60,25 +61,46 @@ class TransparentWindow(QtWidgets.QWidget):
         Cria uma grade isométrica de 10x10 tiles.
         Cada tile é posicionado de forma a simular perspectiva isométrica.
         """
-        with open(f'../{ASSETS_PATH}noise.json', 'r') as file:
+        with open(f'{ASSETS_PATH}noise.json', 'r') as file:
             data = json.load(file)
-        for linha in range(10):       # eixo Y lógico
-            for coluna in range(10):  # eixo X lógico
-                v = data[linha][coluna]
-                print(v)
-                if v < 0.45:
-                    pixmap = QtGui.QPixmap(f"../{ASSETS_PATH}agua.png")
-                # elif v < 0.45:
-                #     pixmap = QtGui.QPixmap(f"../{ASSETS_PATH}areia.png")
-                else:
-                    pixmap = QtGui.QPixmap(f"../{ASSETS_PATH}grama.png")
+        for linha in range(20):       # eixo Y lógico
+            for coluna in range(20):  # eixo X lógico
+                # v = data[linha][coluna]
+                # print(v)
+                # if v < 0.45:
+                #     pixmap = QtGui.QPixmap(f".{ASSETS_PATH}agua32.png")
+                # # elif v < 0.45:
+                # #     pixmap = QtGui.QPixmap(f"../{ASSETS_PATH}areia.png")
+                # else:
+                #     pixmap = QtGui.QPixmap(f"{ASSETS_PATH}grama32.png")
+                pixmap = QtGui.QPixmap(f"{ASSETS_PATH}grama32.png")
                 pixmapitem = self.scene.addPixmap(pixmap)
 
                 # Conversão de coordenadas de grid para coordenadas isométricas
                 x = (coluna - linha) * (TILE_W / 2)
                 y = (coluna + linha) * (TILE_H / 4)
+                pixmapitem.setPos(x-(TILE_W/3), y+(TILE_H/2))
+                # x1 = x + (TILE_W / 2)
+                # y1 = y + (TILE_H / 4)
+                x1 = x
+                y1 = y+8
+                self.gridMiddle.append([x1,y1])
                 self.grid.append([x,y])
-                pixmapitem.setPos(x, y)
+    
+    def seeTileCoordinates(self):
+        for i in self.grid:
+            item = "."
+            itemScene = self.scene.addText(item)
+            print(i)
+            itemScene.setPos(i[0], i[1])
+            itemScene.setDefaultTextColor('orange')
+            
+    def seeMiddleTileCoordinates(self):
+        for i in self.gridMiddle:
+            item = ";"
+            itemScene = self.scene.addText(item)
+            itemScene.setPos(i[0], i[1])
+            itemScene.setDefaultTextColor('black')
 
 
     def choose_new_target(self):

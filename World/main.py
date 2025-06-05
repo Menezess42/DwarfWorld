@@ -8,8 +8,8 @@ import numpy as np
 # print(noise)
 # Exemplo com tudo habilitado
 noise = gerar_mapa_perlin(
-    width=10,
-    height=10,
+    width=20,
+    height=20,
     scale=15,
     octaves=4,
     persistence=0.55,

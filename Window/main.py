@@ -29,8 +29,8 @@ class TransparentWindow(QtWidgets.QWidget):
 
         self.scene = QtWidgets.QGraphicsScene(0, 0, 0, 0)
         self.creatingTiles()  # Preenche self.grid com posições isométricas
-        self.seeTileCoordinates()
-        self.seeMiddleTileCoordinates()
+        # self.seeTileCoordinates()
+        # self.seeMiddleTileCoordinates()
 
         self.sprite_sheet = QtGui.QPixmap(f"{ASSETS_PATH}/finalChar.png")
         self.fw = 18
@@ -75,6 +75,10 @@ class TransparentWindow(QtWidgets.QWidget):
         # Salva a imagem com o ponto desenhado
         pixmap_copy.save("frame_with_offset.png", "PNG")
 
+        # item = "."
+        # itemScene = self.scene.addText(item)
+        # itemScene.setPos(self.x, self.y)
+        # itemScene.setDefaultTextColor('white')
 
         view = QtWidgets.QGraphicsView(self.scene)
         view.setInteractive(False)
@@ -109,8 +113,8 @@ class TransparentWindow(QtWidgets.QWidget):
                 x = (coluna - linha) * (TILE_W / 2)
                 y = (coluna + linha) * (TILE_H / 4)
                 pixmapitem.setPos(x-(TILE_W/3), y+(TILE_H/2))
-                # x1 = x + (TILE_W / 2)
-                # y1 = y + (TILE_H / 4)
+                x1 = x + (TILE_W / 2)
+                y1 = y + (TILE_H / 4)
                 x1 = x
                 y1 = y+8
                 self.gridMiddle.append([x1,y1])
@@ -129,6 +133,11 @@ class TransparentWindow(QtWidgets.QWidget):
             itemScene = self.scene.addText(item)
             itemScene.setPos(i[0], i[1])
             itemScene.setDefaultTextColor('black')
+        # for i in range(len(self.gridMiddle)):
+        #     item = f"{i}"
+        #     itemScene = self.scene.addText(item)
+        #     itemScene.setPos(self.gridMiddle[i][0], self.gridMiddle[i][1])
+        #     itemScene.setDefaultTextColor('black')
 
 
     def choose_new_target(self):

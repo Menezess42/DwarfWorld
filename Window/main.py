@@ -1,164 +1,101 @@
+# Importations
 import os
 import random
 import sys
 from pathlib import Path
-import random
 
 from PySide6 import QtCore, QtGui, QtWidgets
-from calc_foot import calculate_foot_offset
-import json
+
+from Window.calc_foot import calculate_foot_offset
+
 # CONSTANTS
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).parent.parent
 SRC_DIR = os.path.dirname(os.path.abspath(__file__))
-ASSETS_PATH = os.path.join(SRC_DIR, "Assets", "Tests")
-ASSETS_PATH = "./Assets/Tests/"
+print(SRC_DIR)
+ASSETS_PATH = os.path.join(BASE_DIR, "Assets")
+BlOCK_W = 32
+BLOCK_H = 32
 TILE_W = 32
-TILE_H = 32
+TILE_H = 16
 
 
 class TransparentWindow(QtWidgets.QWidget):
     def __init__(self):
-        super().__init__()  # Importa as funcionalidades do QWidget
-        self.grid = []
-        self.gridMiddle = []
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # Janela transparente
-        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)       # Sem bordas
-        self.setStyleSheet("background-color: transparent;")    # Fundo transparente
-        layout = QtWidgets.QVBoxLayout(self)
-        self.setWindowTitle("DwarfWorldWindow")
+        super().__init__()  # Import all the functionalities
+        self.grid = []  # Save the coordinates for the tile placing grid
+        # self.setAttribute(
+        #     QtCore.Qt.WA_TranslucentBackground
+        # )  # Removing background and set to transluce
+        # self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # Removing the window's frame
+        # self.setStyleSheet(
+        #     "Background-color: transparent;"
+        # )  # Set the background color to be transparent
+        self.setWindowTitle("DwarfWorldWindow")  # Set the window name
 
-        self.scene = QtWidgets.QGraphicsScene(0, 0, 0, 0)
-        self.creatingTiles()  # Preenche self.grid com posições isométricas
-        # self.seeTileCoordinates()
-        # self.seeMiddleTileCoordinates()
+        layout = QtWidgets.QVBoxLayout(
+            self
+        )  # Set the parent for all the widgets. In this case all the widgets are childrens of this class
 
-        self.sprite_sheet = QtGui.QPixmap(f"{ASSETS_PATH}/finalChar.png")
-        self.fw = 18
-        self.fh = 24
-        self.direction_index = 3
-        self.current_index = 0
-        self.target_index = 0
+        # self.scene = QtWidgets.QGraphicsScene(0, 0, 640, 360)
+        self.scene = QtWidgets.QGraphicsScene(0, 0, 640, 360)
+        self.scene.addRect(0, 0, 640, 360)  # Vai aparecer no canto superior esquerdo do view
 
-        self.x, self.y = self.gridMiddle[0]
-        xaux, yaux = self.grid[0]
-        
-        self.sprite_item = self.scene.addPixmap(self.get_current_frame())
-        pixmap = self.get_current_frame()
-        foot_offset = calculate_foot_offset(pixmap)
-        print(self.get_current_frame())
-        a = calculate_foot_offset(self.get_current_frame())
-        x, y = a.toTuple()
-        self.sprite_item.setOffset(x, y)
-        self.sprite_item.setZValue(1)  # Fica acima dos tiles
-        self.sprite_item.setPos(self.x, self.y)
+        # scene = QGraphicsScene(-50, -50, 100, 100)
+        # scene.addRect(0, 0, 50, 50)  # O retângulo vai aparecer deslocado (vai precisar ajustar o view)
 
-        # Cria uma cópia da imagem original para desenhar nela
-        pixmap_copy = QtGui.QPixmap(pixmap)  # faz uma cópia para não alterar a original
-
-        # Inicia o pintor para desenhar sobre o pixmap
-        painter = QtGui.QPainter(pixmap_copy)
-        painter.setRenderHint(QtGui.QPainter.Antialiasing)
-
-        # Define a cor e o pincel (círculo vermelho, por exemplo)
-        pen = QtGui.QPen(QtGui.QColor("red"))
-        pen.setWidth(1)
-        painter.setPen(pen)
-        painter.setBrush(QtGui.QBrush(QtGui.QColor("red")))
-
-        # Desenha um pequeno círculo no ponto (x, y)
-        radius = 1
-        painter.drawEllipse(QtCore.QPointF(x, y), radius, radius)
-
-        # Finaliza o pintor
-        painter.end()
-
-        # Salva a imagem com o ponto desenhado
-        pixmap_copy.save("frame_with_offset.png", "PNG")
-
-        # item = "."
-        # itemScene = self.scene.addText(item)
-        # itemScene.setPos(self.x, self.y)
-        # itemScene.setDefaultTextColor('white')
+        self.creating_Tiles(size=2)
+        self.see_Tile_Coordinates()
 
         view = QtWidgets.QGraphicsView(self.scene)
         view.setInteractive(False)
-        view.setMinimumSize(640, 360)
+        view.setMinimumSize(660, 380)
         view.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         view.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
 
         layout.addWidget(view)
         layout.setContentsMargins(0, 0, 0, 0)
 
-    def creatingTiles(self):
-        """
-        Cria uma grade isométrica de 10x10 tiles.
-        Cada tile é posicionado de forma a simular perspectiva isométrica.
-        """
-        # with open(f'{ASSETS_PATH}noise.json', 'r') as file:
-        #     data = json.load(file)
-        for linha in range(14):       # eixo Y lógico
-            for coluna in range(14):  # eixo X lógico
-                # v = data[linha][coluna]
-                # print(v)
-                # if v < 0.45:
-                #     pixmap = QtGui.QPixmap(f".{ASSETS_PATH}agua32.png")
-                # # elif v < 0.45:
-                # #     pixmap = QtGui.QPixmap(f"../{ASSETS_PATH}areia.png")
-                # else:
-                #     pixmap = QtGui.QPixmap(f"{ASSETS_PATH}grama32.png")
-                pixmap = QtGui.QPixmap(f"{ASSETS_PATH}grama32.png")
-                pixmapitem = self.scene.addPixmap(pixmap)
+    def creating_Tiles(self, size: int):
+        """Create a ismotric tile grid.
 
-                # Conversão de coordenadas de grid para coordenadas isométricas
-                x = (coluna - linha) * (TILE_W / 2)
-                y = (coluna + linha) * (TILE_H / 4)
-                pixmapitem.setPos(x-(TILE_W/3), y+(TILE_H/2))
-                x1 = x + (TILE_W / 2)
-                y1 = y + (TILE_H / 4)
-                x1 = x
-                y1 = y+8
-                self.gridMiddle.append([x1,y1])
-                self.grid.append([x,y])
-    
-    def seeTileCoordinates(self):
+        Seting all the png to simulate a isometric tile grid layout.
+
+        Args:
+            <size int>: set the grid size, qtde of tiles.
+        """
+        for line in range(size):
+            for column in range(size):
+                block_pixmap = QtGui.QPixmap(f"{ASSETS_PATH}/Blocks/grama32.png")
+                debug_block_pixmap = QtGui.QPixmap(block_pixmap)
+
+                offset_x = TILE_W/2
+                offset_y = TILE_H/2
+
+                painter = QtGui.QPainter(debug_block_pixmap)
+                pen = QtGui.QPen(QtGui.QColor("red"))
+                pen.setWidth(1)
+                painter.setPen(pen)
+                painter.drawEllipse(QtCore.QPointF(offset_x, offset_y), 1, 1)
+                painter.end()
+
+                debug_block_pixmap.save(f"{BASE_DIR}/Window/debug_image.png")
+
+                block_item = self.scene.addPixmap(debug_block_pixmap)
+                block_item.setOffset(offset_x, offset_y)
+
+                x = (column - line) * (TILE_W / 2)
+                y = (column - line) * (TILE_H / 2)
+
+                block_item.setPos(x, y)
+
+                self.grid.append([x, y])
+
+    def see_Tile_Coordinates(self):
         for i in self.grid:
-            item = "."
+            item = f"{int(i[0])}:{int(i[1])}"
             itemScene = self.scene.addText(item)
             itemScene.setPos(i[0], i[1])
-            itemScene.setDefaultTextColor('orange')
-            
-    def seeMiddleTileCoordinates(self):
-        for i in self.gridMiddle:
-            item = "."
-            itemScene = self.scene.addText(item)
-            itemScene.setPos(i[0], i[1])
-            itemScene.setDefaultTextColor('black')
-        # for i in range(len(self.gridMiddle)):
-        #     item = f"{i}"
-        #     itemScene = self.scene.addText(item)
-        #     itemScene.setPos(self.gridMiddle[i][0], self.gridMiddle[i][1])
-        #     itemScene.setDefaultTextColor('black')
-
-
-    def choose_new_target(self):
-        possible_targets = list(range(len(self.grid)))
-        possible_targets.remove(self.current_index)  # Remove o índice atual para não escolher o mesmo
-        self.target_index = random.choice(possible_targets)
-
-
-    def get_current_frame(self):
-        """
-        Retorna o QPixmap da direção atual.
-        """
-        frame = self.sprite_sheet.copy(
-            0,  # x sempre 0, já que só há uma coluna
-            self.direction_index * self.fh,
-            self.fw,
-            self.fh
-        )
-        print(type(frame))
-        return frame
-
+            itemScene.setDefaultTextColor("black")
 
 
 def Frame():

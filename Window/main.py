@@ -1,3 +1,4 @@
+
 # Importations
 import os
 import random
@@ -35,14 +36,16 @@ class TransparentWindow(QtWidgets.QWidget):
             self
         )  # Set the parent for all the widgets. In this case all the widgets are childrens of this class
 
-
         self.scene = QtWidgets.QGraphicsScene(0, 0, 690, 400)
         # self.scene.setBackgroundBrush(QtGui.QBrush(QtGui.QColor("magenta")))
         self.creating_Tiles(20)
         # self.makeGrid() a = self.scene.addRect(0, 0, 640, 384)  # O retângulo vai aparecer deslocado (vai precisar ajustar o view)
         # self.see_Tile_Coordinates()
-        self.create_overlay_grid(size=20)
+        # self.create_overlay_grid(size=20)
+        
 
+        # creating ovelay matrix
+        # self.overlay_matrix = [[0, 0, 0, 0]]
         # Char
         self.char = QtGui.QPixmap(f"{ASSETS_PATH}/Tests/FinalChar3.png")
         self.char_fw = 18
@@ -167,7 +170,7 @@ class TransparentWindow(QtWidgets.QWidget):
             json.dump(tiles_data, f, indent=2)
 
 
-    def animate_char_over_tiles(self, json_path="tiles.json", delay_ms=900):
+    def animate_char_over_tiles(self, json_path="tiles.json", delay_ms=150):
         """
         Lê as coordenadas dos tiles no JSON e move o char sequencialmente por eles.
         """

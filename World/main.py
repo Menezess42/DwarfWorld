@@ -35,7 +35,8 @@ def Create_overlay_grid(scene, grid: list, size: int, json_path: str):
                 "W": [x, y + TILE_H/2],
             },
             "type": "ground",
-            "occupied": False
+            "occupied": False,
+            "layer": row
         })
 
     with open(json_path, "w") as f:

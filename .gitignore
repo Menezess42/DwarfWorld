@@ -1,5 +1,7 @@
 .envrc
-.*/
+#.*/
+.env/
+.venv/
+.direnv/
 *__pycache__/
 Test/*
-*.png

@@ -17,7 +17,7 @@ BlOCK_W = 32
 BLOCK_H = 32
 TILE_W = 32
 TILE_H = 16
-
+GRID_SIZE = 16
 
 class TransparentWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -38,16 +38,16 @@ class TransparentWindow(QtWidgets.QWidget):
 
         self.scene = QtWidgets.QGraphicsScene(0, 0, 690, 400)
         # self.scene.setBackgroundBrush(QtGui.QBrush(QtGui.QColor("magenta")))
-        self.creating_Tiles(20)
+        self.creating_Tiles(GRID_SIZE)
         # self.makeGrid() a = self.scene.addRect(0, 0, 640, 384)  # O retângulo vai aparecer deslocado (vai precisar ajustar o view)
         # self.see_Tile_Coordinates()
-        # self.create_overlay_grid(size=20)
+        self.create_overlay_grid(size=GRID_SIZE)
         
 
         # creating ovelay matrix
         # self.overlay_matrix = [[0, 0, 0, 0]]
         # Char
-        self.char = QtGui.QPixmap(f"{ASSETS_PATH}/Tests/FinalChar3.png")
+        self.char = QtGui.QPixmap(f"{ASSETS_PATH}/Chars/char2.png")
         self.char_fw = 18
         self.char_fh = 24
         self.char_item = self.scene.addPixmap(self.char)
@@ -170,7 +170,7 @@ class TransparentWindow(QtWidgets.QWidget):
             json.dump(tiles_data, f, indent=2)
 
 
-    def animate_char_over_tiles(self, json_path="tiles.json", delay_ms=150):
+    def animate_char_over_tiles(self, json_path="tiles.json", delay_ms=1000):
         """
         Lê as coordenadas dos tiles no JSON e move o char sequencialmente por eles.
         """

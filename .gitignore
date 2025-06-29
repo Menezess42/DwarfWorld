@@ -1,5 +1,6 @@
 .envrc
 #.*/
+.old/
 .env/
 .venv/
 .direnv/

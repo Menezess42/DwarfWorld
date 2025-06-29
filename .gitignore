@@ -1,0 +1,8 @@
+.envrc
+#.*/
+.old/
+.env/
+.venv/
+.direnv/
+*__pycache__/
+Test/*

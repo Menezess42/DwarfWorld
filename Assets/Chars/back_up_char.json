@@ -1,0 +1,264 @@
+{ "frames": {
+   "DwarfChar0.ase": {
+    "frame": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 150
+   },
+   "DwarfChar1.ase": {
+    "frame": { "x": 28, "y": 0, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 150
+   },
+   "DwarfChar2.ase": {
+    "frame": { "x": 56, "y": 0, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 150
+   },
+   "DwarfChar3.ase": {
+    "frame": { "x": 84, "y": 0, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 150
+   },
+   "DwarfChar4.ase": {
+    "frame": { "x": 112, "y": 0, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 150
+   },
+   "DwarfChar5.ase": {
+    "frame": { "x": 140, "y": 0, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 150
+   },
+   "DwarfChar6.ase": {
+    "frame": { "x": 0, "y": 27, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar7.ase": {
+    "frame": { "x": 28, "y": 27, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar8.ase": {
+    "frame": { "x": 56, "y": 27, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar9.ase": {
+    "frame": { "x": 84, "y": 27, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar10.ase": {
+    "frame": { "x": 112, "y": 27, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar11.ase": {
+    "frame": { "x": 140, "y": 27, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar12.ase": {
+    "frame": { "x": 0, "y": 54, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar13.ase": {
+    "frame": { "x": 28, "y": 54, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar14.ase": {
+    "frame": { "x": 56, "y": 54, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar15.ase": {
+    "frame": { "x": 84, "y": 54, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar16.ase": {
+    "frame": { "x": 112, "y": 54, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar17.ase": {
+    "frame": { "x": 140, "y": 54, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar18.ase": {
+    "frame": { "x": 0, "y": 81, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar19.ase": {
+    "frame": { "x": 28, "y": 81, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar20.ase": {
+    "frame": { "x": 56, "y": 81, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar21.ase": {
+    "frame": { "x": 84, "y": 81, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar22.ase": {
+    "frame": { "x": 112, "y": 81, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar23.ase": {
+    "frame": { "x": 140, "y": 81, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 100
+   },
+   "DwarfChar24.ase": {
+    "frame": { "x": 0, "y": 108, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 235
+   },
+   "DwarfChar25.ase": {
+    "frame": { "x": 28, "y": 108, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 235
+   },
+   "DwarfChar26.ase": {
+    "frame": { "x": 56, "y": 108, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 235
+   },
+   "DwarfChar27.ase": {
+    "frame": { "x": 84, "y": 108, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 235
+   },
+   "DwarfChar28.ase": {
+    "frame": { "x": 112, "y": 108, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 235
+   },
+   "DwarfChar29.ase": {
+    "frame": { "x": 140, "y": 108, "w": 28, "h": 27 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 28, "h": 27 },
+    "sourceSize": { "w": 28, "h": 27 },
+    "duration": 235
+   }
+ },
+ "meta": {
+  "app": "https://github.com/LibreSprite/LibreSprite/",
+  "version": "1.1-dev",
+  "image": "C:\\Users\\ariel\\OneDrive\\Documentos\\sprite\\final_DwarfWorld_char_sprite.png",
+  "format": "RGBA8888",
+  "size": { "w": 168, "h": 135 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "SE", "from": 0, "to": 5, "direction": "forward" },
+   { "name": "NE", "from": 6, "to": 11, "direction": "forward" },
+   { "name": "NW", "from": 12, "to": 17, "direction": "forward" },
+   { "name": "SW", "from": 18, "to": 23, "direction": "forward" },
+   { "name": "Idle", "from": 24, "to": 29, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" },
+   { "name": "char", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 2", "opacity": 50, "blendMode": "normal" },
+   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" }
+  ]
+ }
+}

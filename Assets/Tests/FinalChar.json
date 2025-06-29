@@ -1,0 +1,92 @@
+{ "frames": {
+   "2FinalArt 0.ase": {
+    "frame": { "x": 0, "y": 0, "w": 18, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 24 },
+    "sourceSize": { "w": 18, "h": 24 },
+    "duration": 200
+   },
+   "2FinalArt 1.ase": {
+    "frame": { "x": 0, "y": 24, "w": 18, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 24 },
+    "sourceSize": { "w": 18, "h": 24 },
+    "duration": 200
+   },
+   "2FinalArt 2.ase": {
+    "frame": { "x": 0, "y": 48, "w": 18, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 24 },
+    "sourceSize": { "w": 18, "h": 24 },
+    "duration": 200
+   },
+   "2FinalArt 3.ase": {
+    "frame": { "x": 0, "y": 72, "w": 18, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 24 },
+    "sourceSize": { "w": 18, "h": 24 },
+    "duration": 200
+   },
+   "2FinalArt 4.ase": {
+    "frame": { "x": 0, "y": 96, "w": 18, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 24 },
+    "sourceSize": { "w": 18, "h": 24 },
+    "duration": 200
+   },
+   "2FinalArt 5.ase": {
+    "frame": { "x": 0, "y": 120, "w": 18, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 24 },
+    "sourceSize": { "w": 18, "h": 24 },
+    "duration": 200
+   },
+   "2FinalArt 6.ase": {
+    "frame": { "x": 0, "y": 144, "w": 18, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 24 },
+    "sourceSize": { "w": 18, "h": 24 },
+    "duration": 200
+   },
+   "2FinalArt 7.ase": {
+    "frame": { "x": 0, "y": 168, "w": 18, "h": 24 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 18, "h": 24 },
+    "sourceSize": { "w": 18, "h": 24 },
+    "duration": 200
+   }
+ },
+ "meta": {
+  "app": "https://github.com/LibreSprite/LibreSprite/",
+  "version": "1.1-dev",
+  "image": "C:\\Users\\ariel\\OneDrive\\Documentos\\sprite\\2FinalArt.png",
+  "format": "RGBA8888",
+  "size": { "w": 18, "h": 192 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" },
+   { "name": "MaybeBody", "opacity": 255, "blendMode": "normal" },
+   { "name": "Charcater Hight", "opacity": 255, "blendMode": "normal" },
+   { "name": "DwarfWithoutHatANDAxe", "opacity": 255, "blendMode": "normal" },
+   { "name": "Floor", "opacity": 255, "blendMode": "normal" },
+   { "name": "MidllleMark", "opacity": 255, "blendMode": "normal" },
+   { "name": "BodyType", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
+   { "name": "Body", "opacity": 255, "blendMode": "normal" },
+   { "name": "Legs", "opacity": 255, "blendMode": "normal" },
+   { "name": "Arms", "opacity": 255, "blendMode": "normal" },
+   { "name": "Head", "opacity": 255, "blendMode": "normal" }
+  ]
+ }
+}

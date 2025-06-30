@@ -1,7 +1,7 @@
 # main.py
 from PySide6.QtWidgets import QApplication
 from Window.main import TransparentWindow
-from World.main import Create_overlay_grid, Create_tile_grid
+from World.main import Create_overlay_grid, Create_tile_grid, Create_column_row_indexation
 from Char.main import CharAnimator
 from PySide6 import QtGui, QtWidgets
 from pathlib import Path
@@ -16,6 +16,7 @@ def main():
     # Criando tiles e overlay
     Create_tile_grid(scene, grid, size=16)
     Create_overlay_grid(scene, grid, size=16, json_path="tiles.json")
+    Create_column_row_indexation(scene, json_path="tiles.json")
 
     # Criando personagem
     char_pixmap = QtGui.QPixmap("Assets/Blocks/grama32.png")

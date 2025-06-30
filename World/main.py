@@ -6,54 +6,78 @@ import numpy as np
 from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtCore import QObject, Signal
 
+# CONSTANTES GLOBAIS
 ASSETS_PATH = Path(__file__).parent.parent / "Assets" / "Blocks"
 TILE_W, TILE_H = 32, 16
 
 class WorldGenerator(QObject):
-    matriz_criada = Signal(object)
+    '''
+    Cria a ilha e lida com tudo que e relacionado ao mundo
+    '''
+    matriz_criada = Signal(object) # Cria um sinal do tipo objeto: Sinal é como o Qt se comunica entre métodos e outras coisas quando é preciso trablhar fora do escopo de um codigo que roda top down. Parecido com as funcoes compartilhadas entre classe no javascript
 
     def __init__(self):
-        super().__init__()
+        super().__init__() # Heda todos os metodos da classe QObject
 
     def gerar_mundo(self, scene, grid, size: int, json_path: str):
-        self._criar_tiles(scene, grid, size)
-        self._criar_overlay(grid, size, json_path)
-        matriz = self.__criar_matriz_obstaculos(scene, json_path)
-        self.matriz_criada.emit(matriz)
+        '''
+        Funcao responsavel por criar o mundo visivel e o grid overlay que trabalha com posicionamento dos chars e outros objetos
+        '''
+        self._criar_tiles(scene, grid, size) # Cria os tiles png visiveis
+        self._criar_overlay(grid, size, json_path) # Cria os tiles overlay
+        matriz = self.__criar_matriz_obstaculos(scene, json_path) # Cria o labirinto
+        self.matriz_criada.emit(matriz) # Emite o sinal de que a matriz esta pronta para uso
 
     def _criar_tiles(self, scene, grid_ref, size: int):
+        '''
+        Cria o tile isometrico visivel.
+        Input:
+            <scene> -- Cena onde tudo sera exibido e trabalhado;
+            <grid_ref> -- Grid de referencia. Armazena o XY de cada bloco colocado na ilha
+            <siz>: int -- tamanho do grid. Sendo a matriz de tamanho final size*size;
+
+        '''
         for line in range(size):
             for column in range(size):
-                pixmap = QtGui.QPixmap(str(ASSETS_PATH/"grama32.png"))
-                item = scene.addPixmap(pixmap)
-                x = ((column-line)+19)*(TILE_W/2)
-                y = ((column+line)+6)*(TILE_H/2)
-                item.setPos(x,y)
-                grid_ref.append((x, y))
+                pixmap = QtGui.QPixmap(str(ASSETS_PATH/"grama32.png")) # Converte o bloco isometrico de grama em um pixmap
+                item = scene.addPixmap(pixmap) # adiciona o pixmap da grama a cena
+                x = ((column-line)+19)*(TILE_W/2) # define a coordenada x para o posicionamento. (column-line)*(TILE_W/2) é conta para a isometrica ficar correta. O +19 é um valor que chegeui por tentativa para poder centralizar a ilha na cena e ainda nao entendi porque especificamente 19
+                y = ((column+line)+6)*(TILE_H/2) # Define a coordenada y para o posicionamento.
+                item.setPos(x,y) # Coloca o bloco de grama no lugar correto.
+                grid_ref.append((x, y)) # Salva o XY numa lista auxiliar
 
     def _criar_overlay(self, grid, size, json_path):
-        tiles_data = []
-        for idx, (x, y) in enumerate(grid):
-            row = idx//size
-            col = idx%size
-            center = (x+TILE_W/2, y+TILE_H/2)
+        '''
+        Metodo responsavel por criar o grid invisivel por cima do grid visivel. Esse grid invisivel e responsavel por todo o trabalhao de posicionamento de outros objetos e movimentacao de personagens.
+        Inputs:
+            <grid> -- Grid da configuracao do grid visivel;
+            <size> -- valor que define o tamanho do grid. Sendo tamanho=size*size;
+            <json_path> -- Caminho na qual o json com os dados do grid overlay sera adicionado;
+        '''
+        tiles_data = [] # os dados desse grid overlay serao armazenados aqui
+        for idx, (x, y) in enumerate(grid): # Para cada (x, y) armazenado no grid. Assim como index da "contagem" da iteracao
+            row = idx//size # Coluna e o index dividido pelo size (sem resto)
+            col = idx%size # Coluna e o resto da divisao do index pelo size
+            center = (x+TILE_W/2, y+TILE_H/2) # O centro do tile overlay e o ponto X mais o comprimento do tile/2 e Y mais a altura do tile dividido por 2
             tiles_data.append({
-                "grid": [row, col],
-                "world": list(center),
-                "vertices": {
+                # Cria o dicionario com todas as informacoes relevantes para serem armazenadas no json
+                "grid": [row, col], # Posicao daquele tile no grid
+                "world": list(center), # Guarda as coordenadas centrais do tile
+                "vertices": { # Guarda os pontos N,E,S,W do tile caso seja preciso desenha-lo para depuracao
                     "N": [x + TILE_W/2, y],
                     "E": [x + TILE_W, y+TILE_H/2],
                     "S": [x + TILE_W/2, y + TILE_H],
                     "W": [x, y+TILE_H/2],
                     },
-                "type": "ground",
-                "occupied": False,
-                "layer": col
+                "type": "ground", # Define o tipo. Ainda nao tem funcionalidade definida
+                "occupied": False, # Define se esse tile esta ocupado ou nao. Ainda nao tem funcionalidade definida
+                "layer": col # Layer sera utilizado futuramente para definir o Z-value dos objetos
                 })
         with open(json_path, "w") as f:
-            json.dump(tiles_data, f, indent=2)
+            json.dump(tiles_data, f, indent=2) # Salva o dicionario
 
     def __criar_matriz_obstaculos(self, scene, json_path: str):
+        '''Função que talvez não vale a pena comentar. É só uma função para testar outras funcionalidades do programa e que não cabe ao escopo do projeto e logo será enviada para a pasta .old. Ou talvez essa função seja rdesmantelada e aproveitada em partes para o uso futuro de posicionamento de arvores e outras coisas'''
         with open(json_path, "r") as f:
             json_object = json.load(f)
         layer = json_object[-1]['layer'] + 1
@@ -73,9 +97,15 @@ class WorldGenerator(QObject):
         return matriz
 #
     def __in_bounds(self, r, c, len_matriz):
+        '''
+        Metodo utilizado para verificar se um ponto esta constrito dentro dos limites possiveis
+        '''
         return 0 <= r < len_matriz and 0 <= c < len_matriz
 
     def __gerar_labirinto_prim(self, matriz):
+        '''
+        Função de testes A*. Cria um labirinto. Não é aplicavel ao escopo do projeto e sera movida para o .old futuramente
+        '''
         matriz[:, :, 2] = 1
         len_matriz = len(matriz)
         start_row = random.randrange(1, len_matriz, 2)

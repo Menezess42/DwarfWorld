@@ -2,6 +2,9 @@
 from PySide6 import QtWidgets, QtGui, QtCore
 
 class TransparentWindow(QtWidgets.QWidget):
+    '''
+    Cria a janela transparente e sem bordas.
+    '''
     def __init__(self, scene):
         super().__init__()
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)

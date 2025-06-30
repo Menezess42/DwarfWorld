@@ -2,7 +2,7 @@
 from PySide6 import QtWidgets, QtGui, QtCore
 
 class TransparentWindow(QtWidgets.QWidget):
-    def __init__(self, scene, char_pixmap):
+    def __init__(self, scene):
         super().__init__()
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
@@ -10,7 +10,6 @@ class TransparentWindow(QtWidgets.QWidget):
         self.setWindowTitle("DwarfWorldWindow")
 
         self.scene = scene
-        self.char_item = self.scene.addPixmap(char_pixmap)
 
         view = QtWidgets.QGraphicsView(self.scene)
         view.setInteractive(False)

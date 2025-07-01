@@ -6,7 +6,7 @@ from Char.main import CharManager
 from PySide6 import QtGui, QtWidgets
 
 def main():
-    SIZE = 16
+    SIZE = 13
     app = QApplication()
     scene = QtWidgets.QGraphicsScene(0, 0, 690, 400)
     grid = []
